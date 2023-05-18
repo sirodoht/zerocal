@@ -4,7 +4,7 @@ release:
 
 .PHONY: deploy
 deploy: release
-	scp ./target/x86_64-unknown-linux-gnu/release/zerocal deploy@5.75.194.9:/var/www/calendario/
+	rsync -avz ./target/x86_64-unknown-linux-gnu/release/zerocal deploy@5.75.194.9:/var/www/calendario/zerocal
 	ssh deploy@5.75.194.9 'sudo systemctl restart zerocal'
 
 .PHONY: watch
