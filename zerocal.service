@@ -1,0 +1,20 @@
+[Unit]
+Description=zerocal
+After=network.target
+
+[Service]
+Type=simple
+
+WorkingDirectory=/var/www/calendario
+ExecStart=/bin/bash -lc 'exec /var/www/calendario/zerocal'
+
+User=deploy
+Group=deploy
+
+Environment="PORT=8000"
+
+TimeoutSec=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
