@@ -76,12 +76,26 @@ pub fn create_calendar(params: HashMap<String, String>) -> Result<Calendar> {
 
 #[cfg(test)]
 mod tests {
-    use chrono::TimeZone;
+    use chrono::{LocalResult, TimeZone};
 
     use super::*;
 
     fn unix_to_datetime(unix: i64) -> DatePerhapsTime {
-        DatePerhapsTime::DateTime(CalendarDateTime::Utc(Utc.timestamp(unix, 0)))
+        let local_result = Utc.timestamp_opt(unix, 0);
+        match local_result {
+            LocalResult::Single(datetime) => {
+                // conversion was unambiguous
+                DatePerhapsTime::DateTime(CalendarDateTime::Utc(datetime))
+            },
+            LocalResult::Ambiguous(datetime1, _datetime2) => {
+                // conversion was ambiguous - `datetime1` and `_datetime2` are
+                // the two possible results
+                DatePerhapsTime::DateTime(CalendarDateTime::Utc(datetime1))
+            },
+            LocalResult::None => {
+                panic!("conversion failed")
+            },
+        }
     }
 
     #[test]
