@@ -6,7 +6,7 @@ use crate::time::{parse_duration, parse_time};
 use chrono::{DateTime, Duration, Utc};
 
 const DEFAULT_EVENT_TITLE: &str = "New Calendar Event";
-const DEFAULT_DESCRIPTION: &str = "Powered by zerocal.shuttleapp.rs";
+const DEFAULT_DESCRIPTION: &str = "Enjoy life";
 
 pub(crate) fn parse_opt_time(time: Option<&String>) -> Result<Option<DateTime<Utc>>> {
     // Turn time into Option<Result>
