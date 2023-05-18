@@ -1,0 +1,12 @@
+calendario.day:443 {
+        route {
+                reverse_proxy 127.0.0.1:8000
+        }
+
+        tls zf+calendario@sirodoht.com {
+                on_demand
+        }
+
+        encode zstd gzip
+}
+
