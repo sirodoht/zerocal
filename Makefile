@@ -1,15 +1,11 @@
-.PHONY: run dev
-run dev: ## Run the app in development mode on shuttle
-	cargo shuttle run
+.PHONY: release
+release:
+	cargo build --release --features local
 
-.PHONY: watch local
-watch local: ## Run the app in local development mode
+.PHONY: watch
+watch:
 	cargo watch -x 'run --features local'
 
-.PHONY: deploy
-deploy: ## Deploy to shuttle
-	cargo shuttle deploy
-
 .PHONY: lint
-lint: ## Run linter
+lint:
 	cargo clippy --all-targets --all-features -- -D warnings
