@@ -36,6 +36,15 @@ and then run
 make local
 ```
 
+## Deployment
+
+```
+cp Caddyfile /etc/caddy/Caddyfile
+cp zerocal.service /lib/systemd/system/zerocal.service
+ln -s /lib/systemd/system/zerocal.service /etc/systemd/system/multi-user.target.wants/zerocal.service
+make deploy
+```
+
 ## Derivatives
 
 Was your project inspired by zerocal? Add it here!
