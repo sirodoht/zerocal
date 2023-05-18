@@ -9,6 +9,7 @@ use anyhow::Result;
 async fn main() -> Result<()> {
     let router = zerocal::get_router();
     let addr = SocketAddr::from(([127, 0, 0, 1], 8000));
+    println!("Listening on http://localhost:8000/");
     axum::Server::bind(&addr)
         .serve(router.into_make_service())
         .await?;
