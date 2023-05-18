@@ -1,6 +1,11 @@
 .PHONY: release
 release:
-	cargo build --release --features local
+	cross build --release --features local --target=x86_64-unknown-linux-gnu
+
+.PHONY: deploy
+deploy: release
+	scp ./target/x86_64-unknown-linux-gnu/release/zerocal deploy@5.75.194.9:/var/www/calendario/
+	ssh deploy@5.75.194.9 'sudo systemctl restart zerocal'
 
 .PHONY: watch
 watch:
